@@ -1,118 +1,214 @@
-/* main.css */
+/* --------------------------------------------------
+ *  Google Fonts
+ * -------------------------------------------------- */
+ @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;600;700&display=swap");
 
-/* These are the colors and fonts used throughout the webpage.
- * I've listed them here so that future maintainers can easily
- * do a search-and-replace for these to change the site theme if they choose.
- *   'Roboto',sans-serif; Font for the title text
- *   'Roboto-Slab',serif; Font for the body text 
- *   #fefefe; Background color of the site
- *   #505050; Foreground (text) color of the site
- *   #003066; UCR Navy, "Connection" in the logo, current page in navigation, titles in the Program
- *   #2d6cc0; UCR Blue, Heading color, subtitles in the Program
- *   #f1ab00; UCR Gold, "Math" in the logo, hover color for links
- *   #c88e00; UCR Gold Darkened, color for links
- *   #7a6e67; UCR Gray, not currently used for anything
- */
+ /* --------------------------------------------------
+  *  CSS Reset（簡易）
+  * -------------------------------------------------- */
+ *,
+ *::before,
+ *::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+ }
 
-*{
-    border:0;
-    font:inherit;
-    font-size:1em;
-    margin:0;
-    padding:0;
-    vertical-align:baseline;
-}
 
-body{
-    background-color: #fafafa;
-    background-size: cover;
-    background-attachment: fixed;
-    color: #505050; 
-    text-align:left;
-    font-family:'Roboto',sans-serif;
-    font-size:1em;
-    line-height:1.5em;
-    margin: 60px auto;
-    width: 1000px;
-}
+/* 修正版：ロゴ同士の間隔を広げ、コンテナを中央寄せ */
+.host-logos {
+    display: flex;
+    justify-content: center;  /* 左右中央寄せ */
+    align-items: center;      /* 垂直中央揃え */
+    gap: 3rem;                /* ロゴ間のスペース */
+    margin: 2rem auto;        /* 上下余白＋左右自動マージンで中央 */
+  }
 
-a{color: #c88e00; text-decoration:none;}
-a.current{color: #003066;}
-a:hover{color: #f1ab00; text-decoration:none;}
-a.current:hover{color: #003066;}
-h1,h2,h3,h4{clear:left; color: #2d6cc0; margin:1.5em 0em 1em 0em; font-family:'Roboto Slab',serif;}
-h1{font-size:2.67em;}
-h2{font-size:2.00em;}
-h3{font-size:1.67em;}
-h4{font-size:1.33em;}
-p{list-style:none; margin:24px auto 24px auto; padding:0px; width:900px; text-align:left;}
-ul{list-style:none; margin:24px auto 24px auto; padding:0px; width:800px; text-align:left;}
-ul li{list-style:none; margin:0px auto 0px auto; padding:0px; text-align:left;}
-i,em{font-style:italic;}
-b,strong{font-weight:bold;}
-sup{
-    vertical-align: super;
-    font-size: 0.8em;
-    line-height: 0;
-}
-sub{
-    vertical-align: sub;
-    font-size: 0.8em;
-    line-height: 0;
-}
-table{
-    width: 1000px;
-    margin: 12px auto 24px auto;
-    float: center;
-    /* UNCOMMENT THIS FOR DEBUGGING THE ALIGNMENT */
-    /*border: 1px solid black;*/
-}
-th,td{
-    text-align: left;
-    /* UNCOMMENT THIS FOR DEBUGGING THE ALIGNMENT */
-    /*border: 1px solid black;*/
-}
+  .host-logos img {
+    max-height: 80px;
+    width: auto;
+    display: block;
+  }
 
-/* Website Banner */
-.banner {position: relative; font-family:'Roboto Slab',serif;}
-.top-left {font-size:5.00em; font-weight: bold; color: #505050; background: #fafafa; text-align: center; width: 1000px; height: 67px; position: absolute; padding: 36px 0 0 0; top: 0px;}
-.bottom-right {font-size:2.33em; color: #fefefe; line-height: 1.5em; width: auto; height: 100px; padding: 0px 27px 27px 0px; text-align: right; position: absolute; bottom: 0px; right: 0px;}
+/* 既存の host-logos img ルールはそのままに */
 
-/* Navigation Links (Home, Registration, etc) */
-table.navigation{width:800px;}
-td.navigation{font-size:1.67em; color: #bbbbbb; white-space:nowrap; width:20%; text-align:center; vertical-align:middle; padding:0px 0px 0px 0px;}
+/* ２番目のロゴ（UTokyo）のみ大きくする */
+.host-logos img:nth-child(2) {
+    max-height: 120px;  /* 元の 80px → 100px に拡大 */
+  }
 
-/* Sponsor Images */
-table.sponsors{width:800px;}
-td.sponsor{white-space:nowrap; width:33%; text-align:center; vertical-align:middle; padding:0px 0px 0px 0px;}
-td.sponsor img{width: 100%}
 
-/* The Table on the Program Page */
-td.room{padding: 4px 12px 4px 4px; width: 90%; vertical-align:bottom; font-size:1.67em; color: #003066; height:32px;}
-td.date{white-space:nowrap; width:130px; text-align:right; vertical-align:top; padding:4px 16px 0px 0px;}
-td.title{padding: 4px 12px 4px 4px; width: 90%; vertical-align:top; font-size:1.5em; color: #2d6cc0; height:32px;}
-td.title-special{padding: 4px 12px 4px 4px; width: 90%; vertical-align:top; font-size:1.67em; color: #003066; height:32px;}
-td.speaker{padding: 4px 12px 4px 4px; font-style: italic; font-size:1em; max-height:999999px}
-td.abstract{padding: 4px 12px 12px 4px; font-size:1em; max-height:999999px}
-td.abstract img{display: block; margin: 4px auto 8px auto}
-table.plenary{padding-top: 8px; background: #ffffff;}
 
-/* Registration and Directions Iframes and Images */
-iframe.registration{display:block; margin:1em auto 2em auto; width:700px; height:1400px; border:none;}
-iframe.directions{display:block; margin:1em auto 2em auto; width:800px; height:400px; border:none;}
-img.center{display:block; width:67%; margin:1em auto 2em auto;}
-
-/* Flyer Images */
-table.flyers{width:800px;}
-td.flyer{white-space:nowrap; width:50%; text-align:center; vertical-align:middle; padding:0px 0px 0px 0px;}
-td.sponsor img{width: 100%}
-
-/* The Footer */
-table.footer{font-size:0.875em; margin: 72px auto 12px auto; width:300px;}
-td.footer{width:auto; text-align:center; vertical-align:middle;}
-
-/* MathConnections Logo */
-.Math{color: #f1ab00;} 
-.Connections{color: #2d6cc0;}
-.Year{color: #505050; font-size:0.67em; font-weight: lighter;}
-
+ /* --------------------------------------------------
+  *  全体設定
+  * -------------------------------------------------- */
+ html {
+   scroll-behavior: smooth;
+ }
+ 
+ body {
+   font-family: "Roboto", sans-serif;
+   font-size: 16px;
+   line-height: 1.6;
+   color: #404040;
+   background: #fdfdfd;
+   -webkit-font-smoothing: antialiased;
+   padding: 2rem 1rem;          /* モバイル余白 */
+ }
+ 
+ /* --------------------------------------------------
+  *  幅を揃えるコンテナ
+  * -------------------------------------------------- */
+ .container {
+   max-width: 65ch;            /* 見出し・本文・横線すべて同じ幅 */
+   margin: 0 auto;             /* 中央寄せ */
+ }
+ 
+ /* --------------------------------------------------
+  *  見出し
+  * -------------------------------------------------- */
+ h1,
+ h2 {
+   font-family: "Roboto Slab", serif;
+   color: #003366;
+   line-height: 1.2;
+   margin-bottom: 0.75em;
+ }
+ 
+ h1 {
+   font-size: clamp(1.75rem, 2.5vw + 1rem, 3rem);
+ }
+ 
+ h2 {
+   font-size: clamp(1.25rem, 1.2vw + 1rem, 2rem);
+   border-bottom: 2px solid #e2e8f0;
+   padding-bottom: 0.25em;
+   margin-bottom: 1rem;
+ }
+ 
+ /* --------------------------------------------------
+  *  パンくずリスト
+  * -------------------------------------------------- */
+ .breadcrumb {
+   font-size: 0.875rem;
+   color: #64748b;
+   margin-bottom: 1rem;
+ }
+ 
+ .breadcrumb a {
+   color: inherit;
+   text-decoration: none;
+ }
+ 
+ .breadcrumb a:hover {
+   text-decoration: underline;
+ }
+ 
+ /* --------------------------------------------------
+  *  サブタイトル
+  * -------------------------------------------------- */
+ .subtitle {
+   font-weight: 500;
+   color: #475569;
+   margin-top: -0.25rem;
+   margin-bottom: 1.25rem;
+ }
+ 
+ /* --------------------------------------------------
+  *  段落・リスト
+  * -------------------------------------------------- */
+ p {
+   margin-bottom: 1.25rem;
+ }
+ 
+ ul {
+   list-style: none;
+   margin-bottom: 1.75rem;
+ }
+ 
+ ul li {
+   margin-bottom: 0.5rem;
+   padding-left: 1.5rem;
+   position: relative;
+ }
+ 
+ ul li::before {
+   content: "";
+   position: absolute;
+   left: 0;
+   top: 0.6em;
+   width: 0.55rem;
+   height: 0.55rem;
+   border-radius: 50%;
+   background: #003366;
+ }
+ 
+ /* --------------------------------------------------
+  *  コールトゥアクション
+  * -------------------------------------------------- */
+ .cta {
+   display: inline-block;
+   background: #004b99;
+   color: #ffffff;
+   padding: 0.55rem 1rem;
+   border-radius: 0.375rem;
+   font-weight: 600;
+   text-decoration: none;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+   transition: background 0.25s;
+ }
+ 
+ .cta:hover {
+   background: #003b79;
+ }
+ 
+ /* --------------------------------------------------
+  *  レスポンシブ（モバイル）
+  * -------------------------------------------------- */
+ @media (max-width: 600px) {
+   body {
+     padding: 1.5rem 1rem;
+   }
+ 
+   .breadcrumb {
+     font-size: 0.8rem;
+     line-height: 1.4;
+   }
+ 
+   .cta {
+     width: 100%;
+     text-align: center;
+   }
+ 
+   ul li {
+     padding-left: 1.25rem;
+   }
+ }
+ 
+ /* --------------------------------------------------
+  *  ダークモード
+  * -------------------------------------------------- */
+ @media (prefers-color-scheme: dark) {
+   body {
+     background: #0f172a;
+     color: #e2e8f0;
+   }
+ 
+   .breadcrumb {
+     color: #94a3b8;
+   }
+ 
+   h1,
+   h2 {
+     color: #cbd5e1;
+   }
+ 
+   .subtitle {
+     color: #cbd5e1;
+   }
+ 
+   ul li::before {
+     background: #38bdf8;
+   }
+ }
+ 
