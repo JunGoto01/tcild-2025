@@ -19,10 +19,10 @@
  * -------------------------------------------------- */
 .host-logos {
   display: flex;
-  justify-content: center;  /* 左右中央寄せ */
-  align-items: center;      /* 垂直中央揃え */
-  gap: 3rem;                /* ロゴ間のスペース */
-  margin: 2rem auto;        /* 上下余白＋左右自動マージンで中央 */
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin: 2rem auto;
 }
 
 .host-logos img {
@@ -31,9 +31,8 @@
   display: block;
 }
 
-/* ２番目のロゴ（UTokyo）のみ大きくする */
 .host-logos img:nth-child(2) {
-  max-height: 120px;  /* 元の 80px → 120px に拡大 */
+  max-height: 120px;
 }
 
 /* --------------------------------------------------
@@ -50,15 +49,15 @@ body {
   color: #404040;
   background: #fdfdfd;
   -webkit-font-smoothing: antialiased;
-  padding: 2rem 1rem;   /* モバイル余白 */
+  padding: 2rem 1rem;
 }
 
 /* --------------------------------------------------
  *  幅を揃えるコンテナ
  * -------------------------------------------------- */
 .container {
-  max-width: 65ch;      /* 見出し・本文・横線すべて同じ幅 */
-  margin: 0 auto;       /* 中央寄せ */
+  max-width: 65ch;
+  margin: 0 auto;
 }
 
 /* --------------------------------------------------
@@ -112,14 +111,14 @@ h2 {
 }
 
 /* --------------------------------------------------
- *  段落・リスト
+ *  段落・リスト（ジェネリック：ul li の丸マーカー）
  * -------------------------------------------------- */
 p {
   margin-bottom: 1.25rem;
 }
 
 ul {
-  list-style: none;
+  list-style: none;       /* 💡 デフォルトは none にして、後の擬似要素で丸を描画 */
   margin-bottom: 1.75rem;
 }
 
@@ -129,7 +128,7 @@ ul li {
   position: relative;
 }
 
-/* デフォルトの黒丸マーカーを CSS で描画 */
+/* ● を ul li の左に自動描画（プログラム本体にも適用される） */
 ul li::before {
   content: "";
   position: absolute;
@@ -142,19 +141,19 @@ ul li::before {
 }
 
 /* --------------------------------------------------
- *  コールトゥアクション（既存）
+ *  コールトゥアクションボタン（.cta クラス）
  * -------------------------------------------------- */
 .cta {
   display: inline-block;
   background: #004b99;
   color: #ffffff;
-  padding: 0.55rem 1rem;
+  padding: 0.6rem 1.2rem;    /* 余白を少し大きく */
   border-radius: 0.375rem;
   font-weight: 600;
+  font-size: 1.15rem;       /* フォントをやや大きめに */
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  transition: background 0.25s;
-  font-size: 1.15rem;        /* ← ここを追加：文字を少し大きめに */
+  transition: background 0.25s ease;
 }
 
 .cta:hover {
@@ -212,50 +211,68 @@ ul li::before {
 }
 
 /* --------------------------------------------------
- *  Conference Program 用リスト（ここから追加）
+ *  Conference Program 用のリスト
+ *  ① 外側の .program-list に対しては「既存の ul li::before」を残しつつ、
+ *  ② 内側のサブリスト .sub-list にだけは 擬似要素を消去して
+ *     ネイティブな disc マーカーを使う
  * -------------------------------------------------- */
-/* プログラム全体を包むリスト */
+
+/* ── 外側プログラムリスト本体 ── */
 .program-list {
-  list-style: none;    /* デフォルトのマーカーを消す */
+  list-style: none;  /* 親 ul にも none。☆ただし擬似要素で丸を描画し続けるため*/
   padding: 0;
-  margin: 0 0 1.5rem 0; /* 下に少し余白 */
+  margin: 0 0 1.5rem 0;
 }
 
-/* 各行の設定 */
+/* 各行（li）をフレックスで整列 */
 .program-list > li {
   margin-bottom: 0.75em;
   display: flex;
   flex-wrap: wrap;
 }
 
+/* 各行に擬似要素で丸マーカーが出るのをそのまま継続 */
+/* → .program-list > li::before はジェネリックの ul li::before が適用される */
+
 /* 時間部分 */
 .program-list li .time {
-  flex: 0 0 9em;        /* 固定幅：9em（フォントサイズ16pxで約144px） */
+  flex: 0 0 9em;      /* 固定幅：9em（約144px） */
   font-weight: 600;
   color: #003366;
+  padding-left: 0;    /* 擬似要素の丸は li::before が担当するので、ここは余白不要 */
 }
 
-/* イベント（演者名など）部分 */
+/* イベント部分 */
 .program-list li .event {
   flex: 1 1 auto;
   color: #404040;
+  padding-left: 0.5em; /* 時間とイベントの間に少し余白 */
 }
 
-/* サブリスト（パネルの登壇者） */
+/* ── パネル内サブリスト ── */
 .program-list li .sub-list {
-  list-style: disc;
-  margin: 0.5em 0 0.5em 2.5em; /* 左に 2.5em インデント */
+  list-style: disc;          /* ネイティブな黒丸（disc） */
+  margin: 0.5em 0 0.5em 2em; /* 上下余白＋左インデント */
   padding: 0;
 }
 
-/* サブリストの各アイテム */
+/* サブリストの各 li では、ジェネリックに定義された擬似要素を無効化 */
 .program-list li .sub-list li {
   margin-bottom: 0.25em;
-  font-size: 0.95rem;   /* 少し小さめ */
+  font-size: 0.95rem;
   color: #333333;
+  position: relative;
+  padding-left: 0;           /* 擬似要素を消すので余白不要 */
 }
 
-/* --------------------------------------------------
- *  Registration（ボタン）と Program（見出し）の間に余白を開ける場合、
- * あるいは必要な場合はここにスタイルを追記してください。
- * -------------------------------------------------- */
+/* 擬似要素を「表示しない」ように override */
+.program-list li .sub-list li::before {
+  content: none;
+}
+
+/* ── 見出しとプログラムの間に余白を作りたい場合などは以下に追記可 ── */
+/* 例：
+#program {
+  margin-top: 2rem;
+}
+*/
