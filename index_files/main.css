@@ -249,26 +249,33 @@ ul li::before {
   padding-left: 0.5em; /* 時間とイベントの間に少し余白 */
 }
 
-/* ── パネル内サブリスト ── */
+/* ─────────────────────────────────────────────
+   既存の ul li::before で描画される丸マーカーを
+   通常のプログラム本体ではそのまま使い、
+   サブリスト（.sub-list）の li だけ無効化します
+──────────────────────────────────────────── */
+
+/* ① サブリスト本体にはネイティブな disc マーカーを設定 */
 .program-list li .sub-list {
-  list-style: disc;          /* ネイティブな黒丸（disc） */
-  margin: 0.5em 0 0.5em 2em; /* 上下余白＋左インデント */
-  padding: 0;
+  list-style: disc;               /* ネイティブな黒丸（disc）に */
+  margin: 0.5em 0 0.5em 2.5em;    /* 左に 2.5em インデント */
+  padding: 0;                     /* 内側余白は不要 */
 }
 
-/* サブリストの各 li では、ジェネリックに定義された擬似要素を無効化 */
+/* ② サブリスト内の各 li では、擬似要素を無効化 */
 .program-list li .sub-list li {
   margin-bottom: 0.25em;
   font-size: 0.95rem;
   color: #333333;
-  position: relative;
-  padding-left: 0;           /* 擬似要素を消すので余白不要 */
+  position: relative;            /* 位置合わせはネイティブのマーカーで行う */
+  padding-left: 0;               /* 擬似要素分の余白をクリア */
 }
 
-/* 擬似要素を「表示しない」ように override */
+/* ③ 擬似要素（ul li::before）を使わないように override */
 .program-list li .sub-list li::before {
-  content: none;
+  content: none;                 /* 擬似要素を完全に消す */
 }
+
 
 /* ── 見出しとプログラムの間に余白を作りたい場合などは以下に追記可 ── */
 /* 例：
