@@ -258,7 +258,7 @@ ul li::before {
 /* サブリスト（パネル内登壇者） */
 .program-list li .sub-list {
   list-style: disc;                             /* ネイティブな黒丸マーカー */
-  margin: 0.5em 0 0.5em calc(9em + 0.5em);       /* 左に 9em + 0.5em のインデント */
+  margin: 0.5em 0 0.5em calc(9em + 1em);       /* 左に 9em + 0.5em のインデント */
   padding: 0;
 }
 
