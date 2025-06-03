@@ -3,6 +3,7 @@
  * -------------------------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;600;700&display=swap");
 
+
 /* --------------------------------------------------
  *  CSS Reset（簡易）
  * -------------------------------------------------- */
@@ -14,15 +15,16 @@
   padding: 0;
 }
 
+
 /* --------------------------------------------------
  *  ロゴ表示まわり
  * -------------------------------------------------- */
 .host-logos {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  margin: 2rem auto;
+  justify-content: center;  /* 左右中央寄せ */
+  align-items: center;      /* 垂直中央揃え */
+  gap: 3rem;                /* ロゴ間のスペース */
+  margin: 2rem auto;        /* 上下余白＋左右自動マージンで中央 */
 }
 
 .host-logos img {
@@ -31,9 +33,11 @@
   display: block;
 }
 
+/* ２番目のロゴ（UTokyo）のみ大きくする */
 .host-logos img:nth-child(2) {
-  max-height: 120px;
+  max-height: 120px;  /* 元の 80px → 120px に拡大 */
 }
+
 
 /* --------------------------------------------------
  *  全体設定
@@ -49,16 +53,18 @@ body {
   color: #404040;
   background: #fdfdfd;
   -webkit-font-smoothing: antialiased;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem;   /* モバイル余白 */
 }
+
 
 /* --------------------------------------------------
  *  幅を揃えるコンテナ
  * -------------------------------------------------- */
 .container {
-  max-width: 65ch;
-  margin: 0 auto;
+  max-width: 65ch;      /* 見出し・本文・横線すべて同じ幅 */
+  margin: 0 auto;       /* 中央寄せ */
 }
+
 
 /* --------------------------------------------------
  *  見出し
@@ -82,6 +88,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
+
 /* --------------------------------------------------
  *  パンくずリスト
  * -------------------------------------------------- */
@@ -100,6 +107,7 @@ h2 {
   text-decoration: underline;
 }
 
+
 /* --------------------------------------------------
  *  サブタイトル
  * -------------------------------------------------- */
@@ -110,6 +118,7 @@ h2 {
   margin-bottom: 1.25rem;
 }
 
+
 /* --------------------------------------------------
  *  段落・リスト（ジェネリック：ul li の丸マーカー）
  * -------------------------------------------------- */
@@ -118,7 +127,7 @@ p {
 }
 
 ul {
-  list-style: none;       /* 💡 デフォルトは none にして、後の擬似要素で丸を描画 */
+  list-style: none;       /* デフォルトを none にして擬似要素で丸を描画 */
   margin-bottom: 1.75rem;
 }
 
@@ -128,7 +137,7 @@ ul li {
   position: relative;
 }
 
-/* ● を ul li の左に自動描画（プログラム本体にも適用される） */
+/* ● を ul li の左に自動描画 */
 ul li::before {
   content: "";
   position: absolute;
@@ -139,6 +148,7 @@ ul li::before {
   border-radius: 50%;
   background: #003366;
 }
+
 
 /* --------------------------------------------------
  *  コールトゥアクションボタン（.cta クラス）
@@ -159,6 +169,7 @@ ul li::before {
 .cta:hover {
   background: #003b79;
 }
+
 
 /* --------------------------------------------------
  *  レスポンシブ（モバイル）
@@ -182,6 +193,7 @@ ul li::before {
     padding-left: 1.25rem;
   }
 }
+
 
 /* --------------------------------------------------
  *  ダークモード
@@ -210,75 +222,66 @@ ul li::before {
   }
 }
 
+
 /* --------------------------------------------------
  *  Conference Program 用のリスト
- *  ① 外側の .program-list に対しては「既存の ul li::before」を残しつつ、
- *  ② 内側のサブリスト .sub-list にだけは 擬似要素を消去して
- *     ネイティブな disc マーカーを使う
  * -------------------------------------------------- */
 
-/* ── 外側プログラムリスト本体 ── */
+/* メインリスト本体 */
 .program-list {
-  list-style: none;  /* 親 ul にも none。☆ただし擬似要素で丸を描画し続けるため*/
+  list-style: none;      /* ジェネリックな丸は擬似要素で描画 */
   padding: 0;
   margin: 0 0 1.5rem 0;
 }
 
-/* 各行（li）をフレックスで整列 */
 .program-list > li {
   margin-bottom: 0.75em;
   display: flex;
   flex-wrap: wrap;
 }
 
-/* 各行に擬似要素で丸マーカーが出るのをそのまま継続 */
-/* → .program-list > li::before はジェネリックの ul li::before が適用される */
-
 /* 時間部分 */
 .program-list li .time {
-  flex: 0 0 9em;      /* 固定幅：9em（約144px） */
+  flex: 0 0 9em;        /* 固定幅：9em */
   font-weight: 600;
   color: #003366;
-  padding-left: 0;    /* 擬似要素の丸は li::before が担当するので、ここは余白不要 */
+  padding-left: 0;      /* 擬似要素が丸を担当するので余白なし */
 }
 
 /* イベント部分 */
 .program-list li .event {
   flex: 1 1 auto;
   color: #404040;
-  padding-left: 0.5em; /* 時間とイベントの間に少し余白 */
+  padding-left: 0.5em;  /* 時間とイベントの間に余白 */
 }
 
-/* ─────────────────────────────────────────────
-   既存の ul li::before で描画される丸マーカーを
-   通常のプログラム本体ではそのまま使い、
-   サブリスト（.sub-list）の li だけ無効化します
-──────────────────────────────────────────── */
-
-/* ① サブリスト本体にはネイティブな disc マーカーを設定 */
+/* サブリスト（パネル内登壇者） */
 .program-list li .sub-list {
-  list-style: disc;               /* ネイティブな黒丸（disc）に */
-  margin: 0.5em 0 0.5em 2.5em;    /* 左に 2.5em インデント */
-  padding: 0;                     /* 内側余白は不要 */
+  list-style: disc;                             /* ネイティブな黒丸マーカー */
+  margin: 0.5em 0 0.5em calc(9em + 0.5em);       /* 左に 9em + 0.5em のインデント */
+  padding: 0;
 }
 
-/* ② サブリスト内の各 li では、擬似要素を無効化 */
+/* サブリスト内の各項目 */
 .program-list li .sub-list li {
   margin-bottom: 0.25em;
   font-size: 0.95rem;
   color: #333333;
-  position: relative;            /* 位置合わせはネイティブのマーカーで行う */
-  padding-left: 0;               /* 擬似要素分の余白をクリア */
+  position: relative;
+  padding-left: 0;                              /* 擬似要素を無効化するので余白不要 */
 }
 
-/* ③ 擬似要素（ul li::before）を使わないように override */
+/* 擬似要素を完全に消して、重複マーカーを防止 */
 .program-list li .sub-list li::before {
-  content: none;                 /* 擬似要素を完全に消す */
+  content: none;
 }
 
 
-/* ── 見出しとプログラムの間に余白を作りたい場合などは以下に追記可 ── */
-/* 例：
+/* --------------------------------------------------
+ *  必要に応じて追記／カスタマイズ
+ *  例：#program 見出しと本文の余白を調整したい場合など
+ * -------------------------------------------------- */
+/*
 #program {
   margin-top: 2rem;
 }
