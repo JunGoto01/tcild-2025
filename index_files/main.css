@@ -196,33 +196,6 @@ ul li::before {
 }
 
 
-/* --------------------------------------------------
- *  ダークモード
- * -------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0f172a;
-    color: #e2e8f0;
-  }
-
-  .breadcrumb {
-    color: #94a3b8;
-  }
-
-  h1,
-  h2 {
-    color: #cbd5e1;
-  }
-
-  .subtitle {
-    color: #cbd5e1;
-  }
-
-  ul li::before {
-    background: #38bdf8;
-  }
-}
-
 
 /* --------------------------------------------------
  *  Conference Program 用のリスト
